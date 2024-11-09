@@ -1,4 +1,5 @@
 ﻿<!-- Projects Section -->
+@model List<Project>
 <section id="portfolio" class="portfolio section light-background">
 
     <!-- Section Title -->
@@ -20,7 +21,7 @@
 
             <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-webapp">
+                @* <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-webapp">
                     <div class="portfolio-content h-100">
                         <img src="~/img/portfolio/app-1.jpg" class="img-fluid" alt="Web App 1">
                         <div class="portfolio-info">
@@ -90,12 +91,31 @@
                             <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                         </div>
                     </div>
-                </div><!-- End Portfolio Item -->
+                </div><!-- End Portfolio Item --> *@
+                @foreach (var project in Model)
+                {
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-uxui">
+                        <div class="portfolio-content h-100">
+                            <img src="@project.image" class="img-fluid">
+                            <div class="portfolio-info">
+                                <h4>@project.name</h4>
+                                <p>@project.description</p>
+                                <a href="@project.image" title="UI/UX Project 2" data-gallery="portfolio-gallery-uxui" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                <a href="@project.link" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
 
             </div><!-- End Portfolio Container -->
 
         </div>
 
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center">
+        <a href="/Project/Add" class="btn btn-primary"> Add Project </a>
     </div>
 
 </section><!-- /Projects Section -->

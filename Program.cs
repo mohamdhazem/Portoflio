@@ -1,3 +1,10 @@
+using DepiMvcTask1.Data;
+using DepiMvcTask1.Repository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 namespace DepiMvcTask1
 {
     public class Program
@@ -8,6 +15,18 @@ namespace DepiMvcTask1
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<PortflioContext>(
+                options => 
+                {
+                    options.UseSqlServer("Data Source=.;Initial Catalog=Portfolio;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
+                });
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                            .AddEntityFrameworkStores<PortflioContext>();
+
+            builder.Services.AddScoped<IMyInfoRepository, MyInfoRepository>();
+            builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
             var app = builder.Build();
 
